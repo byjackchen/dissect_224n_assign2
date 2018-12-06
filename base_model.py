@@ -15,8 +15,8 @@ class Model(object):
         raise NotImplementedError("Each Model must re-implement this method.")
 
     def train_on_batch(self, sess, inputs_batch, labels_batch):
-        feed = self.create_feed_dict(inputs_batch, labels_batch=labels_batch)
-        _, loss = sess.run([self.train_op, self.loss], feed_dict=feed)
+        feed = self.create_feed_dict(inputs_batch, labels_batch)
+        _, loss = sess.run([self.train, self.loss], feed_dict=feed)
         return loss
 
     def predict_on_batch(self, sess, inputs_batch):
@@ -28,4 +28,4 @@ class Model(object):
         self.add_placeholders()
         self.pred = self.add_prediction_op()
         self.loss = self.add_loss_op(self.pred)
-        self.train_op = self.add_training_op(self.loss)
+        self.train = self.add_training_op(self.loss)
