@@ -1,3 +1,4 @@
+import time
 class Model(object):
     def add_placeholders(self):
         raise NotImplementedError("Each Model must re-implement this method.")

@@ -9,7 +9,7 @@ def softmax(x):
     sfmx = tf.div(x_exp, tf.reduce_sum(x_exp, axis=1, keepdims=True))
     return sfmx
 
-def corss_entropy_loss(y, y_hat):
+def cross_entropy_loss(y, y_hat):
     y_hat_l = tf.log(y_hat)
     ce = tf.negative(tf.reduce_sum(tf.multiply(tf.to_float(y),y_hat_l)))
     return ce
@@ -29,7 +29,7 @@ def test_cross_entropy():
     b_hat = tf.constant(np.array([[.5, .5], [.5, .5], [.5, .5]]),
                                 dtype=tf.float32)
 
-    ce_b = corss_entropy_loss(b,b_hat)
+    ce_b = cross_entropy_loss(b,b_hat)
     with tf.Session() as sess:
         ce_b = sess.run(ce_b)
         print(80*'=')
