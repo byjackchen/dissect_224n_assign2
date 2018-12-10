@@ -20,7 +20,7 @@ class PartialParse(object):
             self.parse_step(t)
         return self.dependencies
 def minibatch_parse(sentences, model, batch_size):
-    partial_parses = [PartialParse(i) for i in sentences]
+    partial_parses = [PartialParse(s) for s in sentences]
     unfinished_parses = list(partial_parses)
     dependencies = []
     while len(unfinished_parses):
@@ -30,9 +30,9 @@ def minibatch_parse(sentences, model, batch_size):
         for i in range(len(minibatch)):
             minibatch[i].parse_step(transitions[i])
 
-        unfinished_parses = [i for i in partial_parses if len(i.stack)>1 or len(i.buffer)>0]
+        unfinished_parses = [p for p in partial_parses if len(p.stack)>1 or len(p.buffer)>0]
          
-    dependencies = [i.dependencies for i in partial_parses]
+    dependencies = [p.dependencies for p in partial_parses]
 
     return dependencies
 
